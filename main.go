@@ -24,6 +24,7 @@ import (
 	_ "errors"
 	"flag"
 	"fmt"
+	scan "github.com/lrxgoat/gomeasure"
 	_ "github.com/certifi/gocertifi"
 	_ "github.com/tumi8/tls"
 	_ "github.com/zzylydx/Zgoscanner/scanner"
@@ -83,7 +84,7 @@ func main() {
 			CTFile := *resultpath + "ct-" + strconv.Itoa(i) + ".txt"
 			RevokeFile := *resultpath + "revoke-" + strconv.Itoa(i) + ".txt"
 			// 开始扫描
-			start(jobs, TLSFile, CertFile, CTFile, RevokeFile, *port, *sni, wgScoped, limiterScoped, ctxScoped)
+			scan.Start(jobs, TLSFile, CertFile, CTFile, RevokeFile, *port, *sni, wgScoped, limiterScoped, ctxScoped)
 		}(&wg, limiter, w, ctx)
 	}
 	// 读取输入文件
